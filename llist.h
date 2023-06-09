@@ -39,6 +39,7 @@ void replace_matches(Node *node, int f_value, int r_value);
 Node *append_list(Node *head1, Node *head2);
 Node *reverse_list(Node *head);
 Node *sort_list(Node *head);
+Node *array_to_list(int arr[], int n);
 void delete_duplicates(Node *head);
 Node *insert_after(Node *head, int after_value, int insert_value);
 Node *merge_sorted_list(Node *head1, Node *head2);

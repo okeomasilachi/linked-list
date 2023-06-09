@@ -1,11 +1,11 @@
 # Linked List Functions
 ## Authour: Okeomasilachi Onyedibia
 #
-This repository contains various functions for working with linked lists in C.
+#### This repository contains various functions for working with linked lists in C.
 
 # Function List
 
-
+### `array_to_list` : creates a link list from an array
 ### `free_list` : free's memory allocated by list_from_env
 ### `list_from_env` : Builds a linked list from the environmental variable
 ### `list_dup`: Duplicates a linked list.

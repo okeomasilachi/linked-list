@@ -1,6 +1,27 @@
 #include "llist.h"
 
 /**
+ * array_to_list - creates a link list from an array
+ * @arr: array to create list from
+ * @n: the number of charactera in the array
+ *
+ * Return: pointer to the new link list
+*/
+Node *array_to_list(int arr[], int n)
+{
+	/* int n = sizeof(arr) / sizeof(arr[0]); */
+	
+	int i;
+	Node *node_array = NULL;
+
+	for (i = n -1; i >= 0; i--)
+		node_array = insert_at_head(node_array, arr[i]);
+	
+	return (node_array);
+	
+}
+
+/**
  * list_from_env - Builds a linked list from the environmental variable
  * @env: pointer to the environmental list
  *
@@ -46,7 +67,6 @@ env_list *list_from_env(char **env)
 	}
 	return (head);
 }
-
 
 /**
  * free_list - free's memory allocated by list_from_env
