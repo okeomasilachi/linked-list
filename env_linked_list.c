@@ -205,5 +205,39 @@ char *get_env(env_list *env, const char *NAME)
 	
 	if (current->next == NULL) return NULL;
 	else if (strcmp(current->NAME, NAME) == 0) return (current->value);
-	else get_env(current->next, NAME);	
+	else return get_env(current->next, NAME);	
+}
+
+/**
+ * delete_duplicate - Deletes duplicate nodes from an env_linked list
+ * @head: The head of the linked list
+ *
+ * Return: void
+ */
+void delete_duplicate(env_list *head)
+{
+	if (head == NULL)
+		return;
+
+	env_list *cur1 = head;
+
+	while (cur1 != NULL && cur1->next != NULL)
+	{
+		env_list *cur2 = cur1;
+
+		while (cur2->next != NULL)
+		{
+			if (strcmp(cur1->NAME, cur2->next->NAME) == 0)
+			{
+				env_list *dup = cur2->next;
+				cur2->next = cur2->next->next;
+				free(dup);
+			}
+			else
+			{
+				cur2 = cur2->next;
+			}
+		}
+		cur1 = cur1->next;
+	}
 }
