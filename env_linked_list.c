@@ -94,7 +94,7 @@ bool is_value(env_list *head, const char *value)
 {
 	if (head == NULL) return false;
 	else if (strcmp(head->NAME, value) == 0) return true;
-	else return is_member(head->next, value);
+	else is_value(head->next, value);
 }
 
 /**
@@ -107,8 +107,8 @@ bool is_value(env_list *head, const char *value)
 bool is_NAME(env_list *head, const char *NAME)
 {
 	if (head == NULL) return false;
-	else if (head->NAME == NAME) return true;
-	else return is_member(head->next, NAME);
+	else if (strcmp(head->NAME, NAME) == 0) return true;
+	else is_NAME(head->next, NAME);
 }
 
 /**
@@ -146,10 +146,7 @@ env_list *insert_env(env_list *head, char *NAME, char *value)
 		return (new_node);
 	else if (is_member(head, NAME))
 	{
-		current = head;
-		while (current->NAME != NAME)
-			current = current->next;
-		current->value = value;
+		set_env_value(head, NAME, value);
 		return (head);
 	}
 	else
