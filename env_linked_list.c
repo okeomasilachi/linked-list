@@ -219,6 +219,7 @@ void delete_duplicate(env_list *head)
 	if (head == NULL)
 		return;
 
+	head = revers_env_list(head);
 	env_list *cur1 = head;
 
 	while (cur1 != NULL && cur1->next != NULL)
@@ -240,4 +241,32 @@ void delete_duplicate(env_list *head)
 		}
 		cur1 = cur1->next;
 	}
+	head = revers_env_list(head);
+}
+
+/**
+ * revers_env_list - Reverses a linked list
+ * @head: The head of the linked list
+ *
+ * Return: A pointer to the reversed linked list
+ */
+env_list *revers_env_list(env_list *head)
+{
+	env_list *current = NULL, *next = NULL, *tmp = NULL; 
+	if (head == NULL) return NULL;
+	if (head->next == NULL) return head;
+
+	current = head;
+	next = head->next;
+
+	current->next = NULL;
+
+	while (next != NULL)
+	{
+		tmp = next->next;
+		next->next = current;
+		current = next;
+		next = tmp;
+	}
+	return (current);	
 }

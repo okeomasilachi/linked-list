@@ -5,6 +5,7 @@ This repository contains various functions for working with linked lists in C.
 
 # Function List
 
+### `revers_env_list` : Reverses a linked list
 ### `delete_duplicate` : Deletes duplicate nodes from an env_linked list
 ### `get_env` : returns the value of a NAME in the env_list if it exist
 ### `delete_match` : Deletes the first matching node from an env_list with a given NAME

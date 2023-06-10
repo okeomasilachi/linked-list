@@ -69,5 +69,6 @@ env_list *insert_env(env_list *head, char *NAME, char *value);
 env_list *delete_match(env_list *head, char *delete_NAME);
 char *get_env(env_list *env, const char *NAME);
 void delete_duplicate(env_list *head);
+env_list *revers_env_list(env_list *head);
 
 #endif /* LLIST_H */
