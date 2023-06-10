@@ -5,6 +5,7 @@ This repository contains various functions for working with linked lists in C.
 
 # Function List
 
+### `set_env_value` : sets the value of a NAME in the env_list if it exist to the specified value
 ### `revers_env_list` : Reverses a linked list
 ### `delete_duplicate` : Deletes duplicate nodes from an env_linked list
 ### `get_env` : returns the value of a NAME in the env_list if it exist
