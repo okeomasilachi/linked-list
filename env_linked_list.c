@@ -1,27 +1,6 @@
 #include "llist.h"
 
 /**
- * array_to_list - creates a link list from an array
- * @arr: array to create list from
- * @n: the number of charactera in the array
- *
- * Return: pointer to the new link list
-*/
-Node *array_to_list(int arr[], int n)
-{
-	/* int n = sizeof(arr) / sizeof(arr[0]); */
-	
-	int i;
-	Node *node_array = NULL;
-
-	for (i = n -1; i >= 0; i--)
-		node_array = insert_at_head(node_array, arr[i]);
-	
-	return (node_array);
-	
-}
-
-/**
  * list_from_env - Builds a linked list from the environmental variable
  * @env: pointer to the environmental list
  *
@@ -86,4 +65,145 @@ void free_list(env_list *head)
 		free(temp->value);
 		free(temp);
 	}
+}
+
+/**
+ * free_list - free's memory allocated by list_from_env recursively
+ * @head: pointer to the head of the linked list
+ *
+ * Return: Void
+*/
+void free_list_recursive(env_list *head)
+{
+	if (head == NULL) return;
+
+	free_list(head->next);
+	free(head->NAME);
+	free(head->value);
+	free(head);
+}
+
+/**
+ * is_value - Checks if a value is present in a linked list
+ * @head: The head of the linked list
+ * @value: The value to search for
+ *
+ * Return: true if the value is found, false otherwise
+ */
+bool is_value(env_list *head, const char *value)
+{
+	if (head == NULL) return false;
+	else if (strcmp(head->NAME, value) == 0) return true;
+	else return is_member(head->next, value);
+}
+
+/**
+ * is_NAME - Checks if a NAME is present in a linked list
+ * @head: The head of the linked list
+ * @NAME: The value to search for
+ *
+ * Return: true if the value is found, false otherwise
+ */
+bool is_NAME(env_list *head, const char *NAME)
+{
+	if (head == NULL) return false;
+	else if (head->NAME == NAME) return true;
+	else return is_member(head->next, NAME);
+}
+
+/**
+ * print - Prints the values of an env_linked list
+ * @head: The head of the linked list
+ *
+ * Return: void
+ */
+void print(env_list *head)
+{
+	env_list *current;
+	current = head;
+
+	while (current != NULL)
+	{
+		printf("%s=%s\n", current->NAME, current->value);
+		current = current->next;
+	}
+	
+}
+
+/**
+ * insert_env - Inserts a new env_list with a given NAME and value at the tail of a linked list
+ * @head: The head of the linked list
+ * @NAME: name of variable
+ * @value: The value to be inserted
+ *
+ * Return: A pointer to the modified linked list
+ */
+env_list *insert_env(env_list *head, char *NAME, char *value)
+{
+	env_list *new_node = NULL, *current = NULL;
+
+	if (head == NULL)
+		return (new_node);
+	else if (is_member(head, NAME))
+	{
+		current = head;
+		while (current->NAME != NAME)
+			current = current->next;
+		current->value = value;
+		return (head);
+	}
+	else
+	{
+		new_node = malloc(sizeof(env_list));
+		new_node->value = value;
+		new_node->NAME = NAME;
+		new_node->next = NULL;
+		current = head;
+		while (current->next != NULL)
+			current = current->next;
+		current->next = new_node;
+		return (head);
+	}
+}
+
+/**
+ * delete_match - Deletes the first matching node from an env_list with a given NAME
+ * @head: The head of the linked list
+ * @delete_NAME: The NAME of list to be deleted
+ *
+ * Return: A pointer to the modified linked list
+ */
+env_list *delete_match(env_list *head, char *delete_NAME)
+{
+	env_list *temp = NULL;
+
+	if (head == NULL) return (NULL);
+	else if (head->next != NULL && strcmp(head->next->NAME, delete_NAME) == 0)
+	{
+		env_list *temp = head->next;
+		head->next = temp->next;
+		free(temp);
+		return (head);
+	}
+	else
+	{
+		head->next = delete_match(head->next, delete_NAME);
+		return (head);
+	}
+}
+
+/**
+ * get_env - returns the value of a NAME in the env_list if it exist
+ * @env: the list to search
+ * @NAME: the name to search for in the list
+ *
+ * Return: a pointer to the value if the NAME exits else NULL
+*/
+char *get_env(env_list *env, const char *NAME)
+{
+	env_list *current = env;
+	
+	if (current->next == NULL) return NULL;
+	else if (strcmp(current->NAME, NAME) == 0) return (current->value);
+	else get_env(current->next, NAME);	
 }

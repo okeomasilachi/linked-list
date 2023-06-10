@@ -1,3 +1,6 @@
+#ifndef LLIST_H
+#define LLIST_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -56,5 +59,14 @@ typedef struct env_list
 	struct env_list *next;
 } env_list;
 
-void free_list(env_list *head);
 env_list *list_from_env(char **env);
+void free_list(env_list *head);
+void free_list_recursive(env_list *head);
+bool is_value(env_list *head, const char *value);
+bool is_NAME(env_list *head, const char *NAME);
+void print(env_list *head);
+env_list *insert_env(env_list *head, char *NAME, char *value);
+env_list *delete_match(env_list *head, char *delete_NAME);
+char *get_env(env_list *env, const char *NAME);
+
+#endif /* LLIST_H */
