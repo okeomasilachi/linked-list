@@ -5,7 +5,14 @@ This repository contains various functions for working with linked lists in C.
 
 # Function List
 
-### `array_to_list : creates a link list from an array
+### `get_env` : returns the value of a NAME in the env_list if it exist
+### `delete_match` : Deletes the first matching node from an env_list with a given NAME
+### `insert_env` : Inserts a new env_list with a given NAME and value at the tail of a linked list
+### `print` : Prints the values of an env_linked list
+### `is_NAME` : Checks if a NAME is present in a linked list
+### `is_value` : Checks if a value is present in a linked list
+### `free_list_recursive` : free's memory allocated by list_from_env recursively
+### `array_to_list` : creates a link list from an array
 ### `free_list` : free's memory allocated by list_from_env
 ### `list_from_env` : Builds a linked list from the environmental variable
 ### `list_dup`: Duplicates a linked list.

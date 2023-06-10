@@ -68,7 +68,7 @@ void free_list(env_list *head)
 }
 
 /**
- * free_list - free's memory allocated by list_from_env recursively
+ * free_list_recursive - free's memory allocated by list_from_env recursively
  * @head: pointer to the head of the linked list
  *
  * Return: Void
